@@ -20,19 +20,35 @@ Setup
 First thing to do is to setup your identity. This identifies you to
 other people who download the project.
 
-    $ git config --global user.name "Your Name"
-    $ git config --global user.email your.email@example.com
+``` sh
+git config --global user.name "Your Name"
+git config --global user.email your.email@example.com
+```
 
 As a helpful step, you may want to set Git to use your favourite editor
 
-    $ git config --global core.editor emacs
+`git config --global core.editor code`
+
+To connect VSCode and Github, you will also need the extension:
+
+> GitHub Pull Requests and Issues
+
+We also suggest downloading the extension `Git Graph` which will allow you to visualize the Git tree locally in VSCode.
 
 Starting your journey
 ---------------------
 
-First, clone this repository:
+First, clone this repository in VScode by pressing F1 and typing:
 
-    $ git clone https://github.com/kuahyeow/git-workshop.git
+> Git: Clone
+
+Or by opening the terminal and typing
+
+``` sh
+git clone https://github.com/equinor/git-workshop.git
+```
+
+Then pasting the URL to the repository: https://github.com/equinor/git-workshop.git
 
 You may want to fork (create your own copy of) the project on github and
 clone from your own repo. You can find the fork button at the top right of
@@ -41,16 +57,12 @@ the screen on a github repository, or more help about doing that [here](https://
 Once you have cloned your repository, you should now see a directory
 called `git-workshop`. This is your `working directory`
 
-    $ cd git-workshop
-    $ ls
-
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Help-browser.svg/20px-Help-browser.svg.png)
-Stuck? Ask for help from the workshop staff
-
 For the curious, you should also see the `.git` subdirectory. This is
 where all your repository’s data and history is kept.
 
-    $ ls -a .git
+``` batch
+dir .git
+```
 
 You will see :
 
@@ -62,9 +74,7 @@ The staging area
 Now, let’s try adding some files into the project. Create a couple of
 files.
 
-Let’s create two files named `bob.txt` and `alice.txt`.
-
-    $ touch alice.txt bob.txt
+Let’s create two files named `bob.txt` and `alice.txt` through VSCode.
 
 Let’s use a mail analogy.
 
@@ -75,7 +85,7 @@ You finalize the process and record it into the git index by using
 
 Let’s add the files to the staging area
 
-    $ git add alice.txt bob.txt
+    git add alice.txt bob.txt
 
 Committing
 ----------
@@ -83,18 +93,15 @@ Committing
 You are now ready to commit. The `-m` flag allows you to enter a message
 to go with the commit at the same time.
 
-    $ git commit -m "I am adding two new files"
-
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Help-browser.svg/20px-Help-browser.svg.png)
-Stuck? Ask for help from the workshop staff
+    git commit -m "I am adding two new files"
 
 Let’s see what just happened
 ----------------------------
 
 We should now have a new commit. To see all the commits so far, use
-`git log`
+`git log`. In VSCode, this can be done through the Git Graph extension.
 
-    $ git log
+    git log
 
 The log should show all commits listed from most recent first to least
 recent. You would see various information like the name of the author,
@@ -106,7 +113,7 @@ files in the previous section. However git log does not show the files
 involved in each commit. To view more information about a commit, use
 `git show`.
 
-    $ git show
+    git show
 
 You should see something similar to:
 
@@ -122,9 +129,6 @@ You should see something similar to:
     diff --git a/bob.txt b/bob.txt
     new file mode 100644
     index 0000000..e69de29
-
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Help-browser.svg/20px-Help-browser.svg.png)
-Stuck? Ask for help from the workshop staff
 
 A necessary digression
 ----------------------
@@ -156,9 +160,6 @@ You should see something like the following:
     @@ -0,0 +1 @@
     +Lorem ipsum Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Help-browser.svg/20px-Help-browser.svg.png)
-Stuck? Ask for help from the workshop staff
-
 Staging area again
 ------------------
 
@@ -166,9 +167,6 @@ Now let’s add our modified file, `alice.txt` to the staging area. Do you
 remember how ?
 
 Next, check the `status` of `alice.txt`. Is it in the staging area now?
-
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Help-browser.svg/20px-Help-browser.svg.png)
-Stuck? Ask for help from the workshop staff
 
 Undoing
 -------
@@ -189,9 +187,6 @@ Here’s how to back out of the staging area :
 Compare the `git status` now to the git status from the previous
 section. How does it differ?
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Help-browser.svg/20px-Help-browser.svg.png)
-Stuck? Ask for help from the workshop staff
-
 Your staging area should now be empty. What’s happened to the Lorem
 Ipsum changes? It’s still there. We are now back to the state just
 before we added this file to staging area. Going back to the mail
@@ -210,9 +205,6 @@ To accomplish this, we use `git checkout`, like so:
 
 You have now un-done your changes. Your file is now empty.
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Help-browser.svg/20px-Help-browser.svg.png)
-Stuck? Ask for help from the workshop staff
-
 Branching
 ---------
 
@@ -229,7 +221,7 @@ itself, will list the branches you currently have
     $ git branch
 
 The `*` should indicate the current branch you are on, which is
-`master`.
+`main`.
 
 If you wish to start another branch, use
 `git checkout -b (new-branch-name)` :
@@ -240,7 +232,7 @@ Try git branch again to check which branch you are currently on:
 
     $ git branch
       exp1
-    * master
+    * main
 
 The new branch is now created. Now let’s work in that branch. To switch
 to the new branch:
@@ -255,23 +247,20 @@ Let’s perform some commits now,
     $ git add test.txt
     $ git commit -m "Added experimental txt"
 
-Now, let’s compare them to the master branch. Use `git diff`
+Now, let’s compare them to the main branch. Use `git diff`
 
-    $ git diff master
+    $ git diff main
 
 Basically what the above output says is that `test.txt` is present on
-the `exp1` branch, but is absent on the `master` branch.
-
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Help-browser.svg/20px-Help-browser.svg.png)
-Stuck? Ask for help from the workshop staff
+the `exp1` branch, but is absent on the `main` branch.
 
 Now you see me, now you don’t
 -----------------------------
 
 Git is good enough to handle your files when you switch between
-branches. Switch back to the `master` branch
+branches. Switch back to the `main` branch
 
-Try switching back to the master branch (Hint: It’s the same command we
+Try switching back to the main branch (Hint: It’s the same command we
 used to switch to the exp1 branch above)
 
 Now, where’s our `test.txt` file ?
@@ -286,9 +275,6 @@ when you switch back to that branch.
 Now, switch back to the exp1 branch, and check that the `test.txt` is
 now present.
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Help-browser.svg/20px-Help-browser.svg.png)
-Stuck? Ask for help from the workshop staff
-
 Merging
 -------
 
@@ -299,12 +285,12 @@ together after the conclusion of work.\
 Git merging works by first switching the branch you want to *into*, and
 then running the command to merge the other branch in.
 
-We now want to merge our `exp1` branch into `master`. First, switch to
-the `master` branch.
+We now want to merge our `exp1` branch into `main`. First, switch to
+the `main` branch.
 
-    git checkout master
+    git checkout main
 
-Next, we merge the `exp1` branch into `master` :
+Next, we merge the `exp1` branch into `main` :
 
     $ git merge exp1
 
@@ -338,16 +324,13 @@ the code below to set it up (don’t worry if you can’t understand it)
     $ git checkout alpher
 
 You should now have a new branch called `alpher`. Try merging that
-branch into `master` now and fix the ensuing conflict.
-
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Help-browser.svg/20px-Help-browser.svg.png)
-Stuck? Ask for help from the workshop staff
+branch into `main` now and fix the ensuing conflict.
 
 Fixing a conflict
 -----------------
 
 You should see a `conflict` with the `gamow.txt` file. This means that
-the same line of text was edited and committed on both the master branch
+the same line of text was edited and committed on both the main branch
 and the alpher branch. The output below basically tells you the current
 situation :
 
@@ -383,9 +366,6 @@ better (Ask for help if stumped)
 Once I have done that, I can then mark the conflict as fixed by using
 `git add` and `git commit`.
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Help-browser.svg/20px-Help-browser.svg.png)
-Stuck? Ask for help from the workshop staff
-
     $ git add gamow.txt
     $ git commit -m "Fixed conflict"
 
@@ -413,7 +393,7 @@ Part II
 =======
 
 Check out the `revert` branch on this repository for further instructions!
-You can always get back to this version of the readme by checking out the master
+You can always get back to this version of the readme by checking out the main
 branch.
 
 Part III
@@ -467,7 +447,7 @@ Let’s collaborate !
 -------------------
 
 Check out the `pull_request` branch on this repository for further instructions!
-You can always get back to this version of the readme by checking out the master branch.
+You can always get back to this version of the readme by checking out the main branch.
 
 Fin
 ---
